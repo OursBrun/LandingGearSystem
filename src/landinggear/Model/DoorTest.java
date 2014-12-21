@@ -30,17 +30,17 @@ public class DoorTest {
 		
 		if(D.getPosition()!=0)
 		{
-			fail("La porte ne s'est pas fermée");
+			fail("La porte ne s'est pas fermï¿½e");
 		}		
 	}
 
 	@Test
 	public void test() {
 
-		// Verifier la conformité des positions
+		// Verifier la conformite des positions
 		if(D.getPosition()>2 || D.getPosition()<0)
 		{
-			fail("La position est hors catégorie");
+			fail("La position est hors categorie");
 		}
 	}
 	
