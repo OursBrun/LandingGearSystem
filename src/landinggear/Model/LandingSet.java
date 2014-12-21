@@ -6,6 +6,7 @@
 package landinggear.Model;
 
 import java.util.*;
+import landinggear.Controller.LandingSetControl;
 
 /**
  *
@@ -20,7 +21,7 @@ public class LandingSet extends Observable implements Observer {
     private int type;
     private Door d;
     private Gear g;
-
+    private String comment;
     public LandingSet(int type, Door d, Gear g) {
         this.type = type;
         this.d = d;
@@ -105,20 +106,29 @@ public class LandingSet extends Observable implements Observer {
     }
 
         public void update(Observable o, Object arg) {
-        if (o instanceof Command) {
-            Command c = (Command) o;
-            if (c.getType() == 1) {
+        if (o instanceof LandingSetControl) {
+             LandingSetControl lSC = (LandingSetControl) o;
+            if (lSC.getCommand()== "Down") {
                 if (d.getPosition() == 0 && g.getPosition() == 0) {
                     extend();
+                    this.setChanged();
+                    this.notifyObservers();
                 } else {
-                    System.out.println("Le train d'attérissage est déjà en position sortie");
+                    this.comment = "Le train d'attérissage est déjà en position sortie";
+                    this.setChanged();
+                    this.notifyObservers();
                 }
             }
-            if (c.getType() == 0) {
+            if (lSC.getCommand()== "Up") {
                 if (d.getPosition() == 0 && g.getPosition() == 2) {
                     retract();
+                    this.setChanged();
+                    this.notifyObservers();
                 } else {
-                    System.out.println("Le train d'attérissage est déjà en position remontée");
+                    this.comment = "Le train d'attérissage est déjà en position remontée";
+                    this.setChanged();
+                    this.notifyObservers();
+                    
                 }
             }
         } else {
