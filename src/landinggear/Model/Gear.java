@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author larryndanga
  */
-public class Gear {
+public class Gear extends Observable {
 
     private int extend_gear_time;
     private int retract_gear_time;
@@ -27,24 +27,33 @@ public class Gear {
         this.position = position;
     }
     public void retractGear() {
+    	
         if(this.position == 2){
              long retract = System.currentTimeMillis() + retract_gear_time;
         while (System.currentTimeMillis() < retract) {
             this.position = 1;
+            this.setChanged();
+            this.notifyObservers();
         }
         this.position = 0;
+        this.setChanged();
+        this.notifyObservers();
         }
        
     }
 
     public void extendGear() {
-        
+
         if(this.position == 0){
              long open = System.currentTimeMillis() + extend_gear_time;
         while (System.currentTimeMillis() < open) {
             this.position = 1;
+            this.setChanged();
+            this.notifyObservers();
         }
         this.position = 2;
+        this.setChanged();
+        this.notifyObservers();
         }
        
     }

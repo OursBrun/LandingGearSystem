@@ -6,6 +6,7 @@
 package landinggear.Model;
 
 import java.util.*;
+
 import landinggear.Controller.LandingSetControl;
 
 /**
@@ -21,12 +22,11 @@ public class LandingSet extends Observable implements Observer {
     private int type;
     private Door d;
     private Gear g;
-    private String comment;
+
     public LandingSet(int type, Door d, Gear g) {
         this.type = type;
         this.d = d;
         this.g = g;
-
         switch (this.type = 0) {
             case 0:
                 this.d.setOpen_door_time(1200);
@@ -44,12 +44,9 @@ public class LandingSet extends Observable implements Observer {
                 System.out.println("Erreur de type de LandingSet");
                 break;
         }
-
     }
 
     public void extend() {
-        this.setChanged();
-        this.notifyObservers();
 
         this.d.openDoor();
         this.setChanged();
@@ -64,9 +61,8 @@ public class LandingSet extends Observable implements Observer {
         this.notifyObservers();
     }
 
-    public void retract() {
-        this.setChanged();
-        this.notifyObservers();
+    public void retract() {;
+
         this.d.openDoor();
         this.setChanged();
         this.notifyObservers();
@@ -105,31 +101,77 @@ public class LandingSet extends Observable implements Observer {
         this.g = g;
     }
 
-        public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
+
         if (o instanceof LandingSetControl) {
-             LandingSetControl lSC = (LandingSetControl) o;
-            if (lSC.getCommand()== "Down") {
-                if (d.getPosition() == 0 && g.getPosition() == 0) {
-                    extend();
-                    this.setChanged();
-                    this.notifyObservers();
-                } else {
-                    this.comment = "Le train d'attérissage est déjà en position sortie";
-                    this.setChanged();
-                    this.notifyObservers();
-                }
+            LandingSetControl lSC = (LandingSetControl) o;
+            if (lSC.getCommand() == "Down") {
+                extend();
+                this.setChanged();
+                this.notifyObservers();
             }
-            if (lSC.getCommand()== "Up") {
-                if (d.getPosition() == 0 && g.getPosition() == 2) {
-                    retract();
-                    this.setChanged();
-                    this.notifyObservers();
-                } else {
-                    this.comment = "Le train d'attérissage est déjà en position remontée";
-                    this.setChanged();
-                    this.notifyObservers();
-                    
-                }
+
+            if (lSC.getCommand() == "Up") {
+
+                retract();
+                this.setChanged();
+                this.notifyObservers();
+
+            }
+
+        } else if (o instanceof Door) {
+            int dp = this.getD().getPosition();
+            int gp = this.getG().getPosition();
+
+            if (dp == 0 && gp == 0) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 0) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 1) {
+                this.setChanged();
+                this.notifyObservers();
+
+            } else if (dp == 2 && gp == 1) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 2 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 0 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
+            }
+        } else if (o instanceof Gear) {
+            int dp = this.getD().getPosition();
+            int gp = this.getG().getPosition();
+
+            if (dp == 0 && gp == 0) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 0) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 1) {
+                this.setChanged();
+                this.notifyObservers();
+
+            } else if (dp == 2 && gp == 1) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 2 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 1 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
+            } else if (dp == 0 && gp == 2) {
+                this.setChanged();
+                this.notifyObservers();
             }
         } else {
             System.out.println("La commande saisie est incorrecte");
@@ -138,8 +180,3 @@ public class LandingSet extends Observable implements Observer {
     }
 
 }
-
-
-
-
-
