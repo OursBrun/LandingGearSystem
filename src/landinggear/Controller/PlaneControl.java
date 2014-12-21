@@ -15,6 +15,9 @@ import landinggear.View.LandingPiloteGUI;
  */
 public class PlaneControl {
      
- 
+    public static void  main (String args[]){
+        
+      LandingPiloteGUI  lPGUI = new landinggear.View.LandingPiloteGUI();
+    }
     
 }

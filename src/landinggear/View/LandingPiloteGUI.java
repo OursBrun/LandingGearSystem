@@ -33,6 +33,9 @@ public class LandingPiloteGUI extends javax.swing.JFrame{
         lSCFront.getS().addObserver(landingSetGUI1);
         lSCLeft.getS().addObserver(landingSetGUI2);
         lSCRight.getS().addObserver(landingSetGUI3);
+        landingSetGUI2.setName("Left LandingSet"); 
+        landingSetGUI1.setName("Front LandingSet"); 
+        landingSetGUI3.setName("Right LandingSet"); 
 
     }
 
@@ -50,7 +53,9 @@ public class LandingPiloteGUI extends javax.swing.JFrame{
         landingSetGUI2 = new landinggear.View.LandingSetGUI();
         landingSetGUI1 = new landinggear.View.LandingSetGUI();
         landingSetGUI3 = new landinggear.View.LandingSetGUI();
-
+        landingSetGUI2.setName("Left LandingSet"); 
+        landingSetGUI1.setName("Front LandingSet"); 
+        landingSetGUI3.setName("Right LandingSet"); 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         command.setText("Down");

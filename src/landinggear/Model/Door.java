@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author larryndanga
  */
-public class Door  {
+public class Door extends Observable  {
 
     private int open_door_time;
     private int close_door_time;
@@ -32,8 +32,12 @@ public class Door  {
             long open = System.currentTimeMillis() + open_door_time;
             while (System.currentTimeMillis() < open) {
                 this.position = 1;
-            }
+                this.setChanged();
+                this.notifyObservers();
+       }
             this.position = 2;
+            this.setChanged();
+            this.notifyObservers();
         }
     }
 
@@ -43,8 +47,12 @@ public class Door  {
             long closing = System.currentTimeMillis() + close_door_time;
             while (System.currentTimeMillis() < closing) {
                 this.position = 1;
+                this.setChanged();
+                this.notifyObservers();
             }
             this.position = 0;
+            this.setChanged();
+            this.notifyObservers();
         }
     }
 
